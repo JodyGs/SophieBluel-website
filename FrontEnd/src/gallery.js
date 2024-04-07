@@ -4,6 +4,10 @@ const filtersHtmlDiv = document.querySelector('.filters')
 let galleryData
 let categories
 
+/**
+ * Call API
+ */
+
 function callAPI(path) {
   fetch(`${apiBaseUrl}${path}`)
     .then(response => {
@@ -22,6 +26,11 @@ function callAPI(path) {
 }
 window.onload = callAPI("works")
 
+/**
+ *  Create on HTML
+ */
+
+//Works
 function displayGallery(data) {
   const fragment = document.createDocumentFragment();
   data.forEach(el => {
@@ -37,6 +46,9 @@ function displayGallery(data) {
   galleryHtmlDiv.appendChild(fragment);
 }
 
+
+// Filter Buttons
+
 function getSingleCategoriesFromWorks(data) {
   let listOfCategories = new Set(); // 
   data.forEach((el) => {
@@ -49,7 +61,6 @@ function getSingleCategoriesFromWorks(data) {
 
   displayFiltersButton(categories)
 }
-
 
 function displayFiltersButton(categories) {
   categories.forEach((element, index) => {
@@ -70,6 +81,8 @@ function displayFiltersButton(categories) {
   });
 }
 
+// Filtration
+
 function toggleWorks(datasetCategory) {
   const figures = document.querySelectorAll(".workCard");
   if ("Tous" === datasetCategory) {
@@ -82,5 +95,15 @@ function toggleWorks(datasetCategory) {
         ? (figure.style.display = "block")
         : (figure.style.display = "none");
     });
+  }
+}
+
+
+/**
+ * Admin mode
+ */
+function setAdminMode() {
+  if (sessionStorage.getItem("token")?.length == 143) {
+    TODO:
   }
 }
