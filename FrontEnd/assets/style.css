@@ -175,11 +175,11 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	cursor: pointer;
 }
 
 li:hover {
 	color: #b1663c;
-	cursor: pointer;
 }
 
 a {
@@ -232,14 +232,15 @@ a {
 	font-size: 16px;
 	font-weight: 700;
 	text-align: center;
-}
-
-.category:hover {
-	/* background-color: #1d615485;
-	color: #ffffff; 
-	transition: all 200ms; */
 	cursor: pointer;
 }
+
+/* .category:hover {
+	background-color: #1d615485;
+	color: #ffffff; 
+	transition: all 200ms; 
+
+}*/
 
 .active {
 	background-color: #1d6154;
@@ -255,7 +256,8 @@ a {
 	grid-row-gap: 20px;
 }
 
-.gallery img {
+.gallery img,
+.miniWork img {
 	width: 100%;
 }
 #contact,
@@ -279,7 +281,8 @@ a {
 	flex-direction: column;
 }
 #contact input,
-#login input {
+#login input,
+.modal input {
 	height: 50px;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
@@ -325,4 +328,221 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em;
+}
+
+/** Administrator **/
+.infoBar {
+	background-color: #000000;
+	color: #ffffff;
+	display: flex;
+	justify-content: center;
+	gap: 2em;
+	padding: 20px;
+	font-family: "Work Sans";
+	font-size: 16px;
+	cursor: default;
+}
+
+.editBtn {
+	padding: 15px 0;
+	background-color: transparent;
+	border: none;
+}
+
+.editBtn:hover {
+	cursor: pointer;
+}
+
+#portfolio {
+	position: relative;
+}
+
+#portfolio .editBtn {
+	position: absolute;
+	top: 0.65em;
+	padding: 0;
+	left: 60%;
+}
+
+/** Modal **/
+.modal {
+	display: none;
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 1;
+}
+.modalWrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: calc(100vw - 20px);
+	max-height: calc(100vh - 50px);
+	width: 630px;
+	padding: 30px;
+	border-radius: 10px;
+	background-color: #ffffff;
+	margin: auto;
+}
+.modalWrapper {
+	display: flex;
+	flex-direction: column;
+	width: 630px;
+	padding: 30px;
+	border-radius: 10px;
+	background-color: #ffffff;
+}
+#editGallery .modalHeader {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
+
+/* FIXME: revoir CSS */
+.modal i {
+	font-size: 1.5em;
+	border-bottom: 10px;
+	cursor: pointer;
+}
+
+.modalTitle {
+	font-size: 26px;
+	margin-bottom: 47px;
+}
+.modalContent {
+	width: 70%;
+	border-bottom: 1px solid #b3b3b3;
+	padding-bottom: 47px;
+}
+#editGallery .modalContent {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-auto-rows: 1fr;
+	grid-column-gap: 8px;
+	grid-row-gap: 10px;
+}
+#addPictureBtn {
+	width: auto;
+	padding: 10px 49px;
+	background-color: #1d6154;
+	border-radius: 60px;
+	color: #fff;
+	font-weight: 700;
+	font-family: "Syne";
+	margin-top: 38px;
+	cursor: pointer;
+}
+#deleteGallery {
+	color: #d65353;
+}
+.miniWork figcaption {
+	font-size: 12px;
+}
+.miniWork {
+	position: relative;
+}
+.miniWork i {
+	display: block;
+	box-sizing: border-box;
+	background-color: #000000;
+	color: #ffffff;
+	font-size: 0.7em;
+	padding: 4px 5px;
+	border-radius: 2px;
+	position: absolute;
+	top: 0.4em;
+	right: 0.4em;
+}
+#addPicture {
+	display: none;
+}
+#addPicture .modalHeader {
+	justify-content: space-between;
+}
+#valider {
+	background-color: #a7a7a7;
+	width: 37%;
+}
+#addPictureForm {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 10px;
+}
+#labelPhoto {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 200px;
+	background-color: #e8f1f6;
+	border-radius: 3px;
+	margin-bottom: 30px;
+	text-align: center;
+	width: 100%;
+	padding-top: 25px;
+	position: relative;
+	box-sizing: border-box;
+}
+#labelPhoto p {
+	font-size: 10px;
+	font-weight: 400;
+}
+#picture {
+	margin-bottom: 27px;
+	width: 5.1em;
+}
+#picturePreview {
+	display: flex;
+	background-color: #e8f1f6;
+	height: 200px;
+	width: 100%;
+	justify-content: center;
+}
+#picturePreview img {
+	height: 100%;
+	width: 31%;
+	object-fit: cover;
+}
+#browsePictures {
+	font-family: "Work Sans";
+	font-size: 1em;
+	font-weight: 600;
+	color: #3d3d3d;
+	width: fit-content;
+}
+#browsePictures {
+	color: #306685;
+	background-color: #cbd6dc;
+	border: none;
+	padding: 10px 33px;
+	margin-bottom: 10px;
+	display: inline-block;
+	cursor: pointer;
+}
+#title {
+	margin-bottom: 11px;
+}
+select {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	background-image: url(./icons/chevron-down.png);
+	background-repeat: no-repeat;
+	background-position: center right;
+	background-origin: content-box;
+	padding-right: 20px;
+	background-color: #ffffff;
+}
+option {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+#photo {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }

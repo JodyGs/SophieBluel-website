@@ -1,8 +1,13 @@
+import { setAdminMode } from "./admin.js"
+
 const apiBaseUrl = "http://localhost:5678/api/"
 const galleryHtmlDiv = document.querySelector('.gallery')
 const filtersHtmlDiv = document.querySelector('.filters')
+const modal = document.querySelector(".modal");
+
 let galleryData
 let categories
+let modalStep
 
 /**
  * Call API
@@ -17,8 +22,10 @@ function callAPI(path) {
       return response.json();
     })
     .then(data => {
-      displayGallery(data)
-      getSingleCategoriesFromWorks(data)
+      galleryData = data
+      displayGallery(galleryData)
+      getSingleCategoriesFromWorks(galleryData)
+      setAdminMode()
     })
     .catch(error => {
       console.error(`Erreur lors de la récupération des données de l'API :, ${error}`);
@@ -100,10 +107,67 @@ function toggleWorks(datasetCategory) {
 
 
 /**
- * Admin mode
+ * Modal
  */
-function setAdminMode() {
-  if (sessionStorage.getItem("token")?.length == 143) {
-    TODO:
+export function openModal(data) {
+  data = galleryData
+  const token = sessionStorage.getItem("token");
+  if (token && token.length === 143) {
+    modal.style.display = "flex";
+    document.querySelector("#addPicture").style.display = "none";
+    document.querySelector("#editGallery").style.display = "flex";
+    displayModalGallery(galleryData)
+    modalStep = 0;
+    modal.addEventListener("click", closeModal);
+
+    document.addEventListener("click", handleButtonClicks);
   }
 }
+
+function closeModal(e) {
+  if (e.target.classList.contains("modal") || e.target.classList.contains("fa-xmark")) {
+    modal.style.display = "none";
+    modal.removeEventListener("click", closeModal);
+    modalStep = null;
+  }
+}
+
+function displayModalGallery(data) {
+  const modalContent = document.querySelector(".modalContent");
+  modalContent.innerHTML = "";
+  //show all works in array
+  data.forEach((i) => {
+    //create elements
+    const miniWork = document.createElement("figure");
+    const workImage = document.createElement("img");
+    const edit = document.createElement("figcaption");
+    const trashCan = document.createElement("i");
+    //trashcan ID is work ID
+    trashCan.id = i.id;
+    trashCan.classList.add("fa-solid", "fa-trash-can");
+    workImage.src = i.imageUrl;
+    workImage.alt = i.title;
+    edit.innerText = "éditer";
+    miniWork.className = "miniWork";
+    //references to DOM
+    modalContent.appendChild(miniWork);
+    miniWork.append(workImage, edit, trashCan);
+  });
+}
+
+function handleButtonClicks(event) {
+  if (event.target.id === "deleteButton") {
+    deleteBtn();
+  } else if (event.target.id === "addPictureBtn") {
+    openNewWorkForm();
+  }
+}
+
+function openNewWorkForm() {
+  console.log("New form");
+}
+
+
+/**
+ * Upload
+ */
