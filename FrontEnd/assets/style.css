@@ -459,6 +459,8 @@ footer nav ul {
 	display: none;
 }
 #addPicture .modalHeader {
+	display: flex;
+	width: 100%;
 	justify-content: space-between;
 }
 #valider {
